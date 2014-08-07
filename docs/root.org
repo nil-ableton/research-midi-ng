@@ -1,0 +1,48 @@
+* HD Protocol
+
+This is the successor to MIDI developed behind closed doors by the HD
+Working Group (HDWG) at the MIDI Manufacturers Association (MMA.)
+
+Started in 2005. Demonstrated to some manufacturers on January 27, 2013.
+
+** Proofs of life:
+- http://www.midi.org/aboutus/news/hd.php
+- [[http://www.kissbox.nl/downloads/Manuals/KissBox_CPU_V3_OEM_RTP-MIDI_HD_Integration_Manual.pdf][Kissbox CM-MIDI]] claims support for the HD Protocol already (only for
+  members of the HDWG)
+
+** Information accessible from publicly accessible information
+
+name: HD Protocol
+creators: MMA HDWG members
+known hardware implementation: KissBox Network CPU / Kissbox / B.Bouchez / (20/02/2014)
+
+"access to HD firmware is restricted to MMA HDWG members until official publication of HD protocol
+specification"
+
+- based on 32 bits word
+- a message is multiple 32 bits words
+- no marker to identify the first word of a message
+- messages for saving/restoring state of an HD network (dump settings from an "entity")
+- real time messages vs beat-timestamped messages (with "bundles" at the same timestamp)
+- variable length messages
+- transports: USB, Ethernet
+- plug & play of devices
+- higher resolution controls
+- more throughput
+- MIDI Device compatibility
+- traditional notes as well as direct pitch notes
+- note update for per-note controls (control+pitch)
+
+Opinion:
+
+"HD-MIDI promises to be improved and more versatile, and does so by
+adding complexity in ways that not everybody will find
+useful. HD-MIDI, at least, has industry consensus. If it is
+sufficiently more effective than MIDI 1.0, it may yet form part of a
+complete next-generation protocol." Ben Supper / Novation/Focusrite
+
+* References
+
+- http://www.midi.org/aboutus/news/hd.php
+- http://www.kissbox.nl/downloads/Manuals/KissBox_CPU_V3_OEM_RTP-MIDI_HD_Integration_Manual.pdf
+- http://focusritedevelopmentteam.wordpress.com/2012/10/24/we-hate-midi-we-love-midi/
