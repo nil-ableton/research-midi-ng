@@ -66,6 +66,11 @@ USI.
 - the protocol influenced user interfaces a great deal (concepts such
   as channels, ports, cc(s) numbers, the piano roll
 
+- graceful degradation of 14-bit capable controllers to a 7-bit signal
+  (MSB in control changes 0-31)
+
+- can be extended quite a bit thanks to NRPNs
+
 ** Questionable properties
 
 - the bandwidth was limited initially (transport through wires)
@@ -98,6 +103,21 @@ USI.
   enough resolution: this can be easily shown by ramping a frequency
   signal as a 7-bit number. A 14-bit control signal really helps.
 
+- channels and control numbers are a nice addressing scheme, but as
+  users do we really want to deal with these abstractions at all?
+
+- why are there so many limitations such as number of available
+  controls, channels etc..
+
+* 14-bit controllers
+
+Known controllers and devices able to deal with 14-bit changes:
+- Moog Little/Slip Phatty (Moog OS3.1)
+- Alesis Andromeda A6 reportedly (uses NRPN controls)
+- BCR 2000
+- http://forum.cockos.com/project.php?issueid=4471
+- U-ze Zebra2 and Diva support 14-bit midi CC# pairs
+
 * Synchronizing Audio and Control signals
 
 Performance data (MIDI controls) in MIDI is meant to be realtime. To
@@ -115,7 +135,32 @@ to convert MIDI to audio signal to do this)
 
 * Device discovery
 
-Emagic SoundDiver 3.0 was able to automatically detect some MIDI devices.
+Couldn't device say "Hello, I am a moog, and I listen to these
+messages" (This is in the MIDI world done by users reading the MIDI
+Implementation table)
+
+- MIDI exists in music editing software so you can work
+  (play/record/replay) with external devices.
+
+- Emagic SoundDiver 3.0 was able to automatically detect some MIDI
+  devices.
+
+- There is a SYSEX (Device Inquiry) to find out about a MIDI device
+
+* RTP MIDI
+
+A positive development. Succeeds where Yamaha's mLan (IEC 61883-6)
+failed. Combined with Zeroconf / Bonjour, allows discovery of
+IP devices supporting RTP MIDI.
+
+* OSC
+
+- No clear structure / namespace
+- Needs convention / standardization of the same form as MIDI has
+  seen. And this is hard (even for the MMA.)
+- Its insistence on arbitrary timestamps can be interpreted as
+  imposing sequencing capabilities onto every receiver of OSC
+  messages, which makes each receiver more complicated.
 
 * Bibliography
 
@@ -125,3 +170,4 @@ Emagic SoundDiver 3.0 was able to automatically detect some MIDI devices.
 - user BenKissBox
 - http://madamebutterface.com/assets/documents/MIDI%201.0%20Detailed%20Specification.pdf
 - Fabian Giesen 2014 http://fgiesen.wordpress.com/2014/03/23/networks-all-the-way-down/
+- Moog OS3.1 http://www.moogmusic.com/OSv3.1 
