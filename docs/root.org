@@ -56,7 +56,10 @@ USI.
 - it was good enough
 - it provided some musical structure
 - escaping (SYSEX) was possible
-- serial, point to point network (basically what all technologies moved to today (Fabian Giesen 2014))
+- serial, point to point network (basically what all technologies
+  moved to today (Fabian Giesen 2014))
+- undefined status bytes are ignored i.e. are safe to use with older hardware
+- MIDI thru is a plain copy i.e. forward compatible
 
 ** Other characteristics
 
@@ -65,7 +68,14 @@ USI.
 
 ** Questionable properties
 
-- the bandwidth was limited initially (transport through wires) .. with move to Ethernet and USB this is not true anymore.
+- the bandwidth was limited initially (transport through wires)
+  .. with move to Ethernet and USB this is not true anymore. This
+  influenced some design decisions (compression through running
+  status, the use of 7-bit only control changes) because it limited
+  performances.
+
+- running status makes the design complex and makes it harder to
+  implement variable length messages
 
 - the protocol defines a basic purely technological standard that is
   understood by many, however the MMA also sets another standard on
@@ -81,6 +91,12 @@ USI.
 - many people relied on secondary source of information about the
   protocol, thus reducing the impact of its conventions in particular
   for pure software implementations.
+
+- basic data type is a 7-bit integer. Some controls (pitch-bend) and
+  the first 32 control change controllers are intended to be 14-bit
+  however this is rarely practiced/understood. Some complain about not
+  enough resolution: this can be easily shown by ramping a frequency
+  signal as a 7-bit number. A 14-bit control signal really helps.
 
 * Synchronizing Audio and Control signals
 
