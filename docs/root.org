@@ -9,6 +9,7 @@ Started in 2005. Demonstrated to some manufacturers on January 27, 2013.
 - http://www.midi.org/aboutus/news/hd.php
 - [[http://www.kissbox.nl/downloads/Manuals/KissBox_CPU_V3_OEM_RTP-MIDI_HD_Integration_Manual.pdf][Kissbox CM-MIDI]] claims support for the HD Protocol already (only for
   members of the HDWG)
+- Photo of a HD <-> CV interface HDCV88 http://www.muffwiggler.com/forum/viewtopic.php?t=49278&start=10&sid=d16d268b318c7cd3119093f590ce832d
 
 ** Information accessible from publicly accessible information
 
@@ -32,6 +33,7 @@ specification"
 - MIDI Device compatibility
 - traditional notes as well as direct pitch notes
 - note update for per-note controls (control+pitch)
+- has a transport protocol (USB + some protocol compatible with RTP-MIDI, while being independent)
 
 Opinion:
 
@@ -46,3 +48,4 @@ complete next-generation protocol." Ben Supper / Novation/Focusrite
 - http://www.midi.org/aboutus/news/hd.php
 - http://www.kissbox.nl/downloads/Manuals/KissBox_CPU_V3_OEM_RTP-MIDI_HD_Integration_Manual.pdf
 - http://focusritedevelopmentteam.wordpress.com/2012/10/24/we-hate-midi-we-love-midi/
+- user BenKissBox
