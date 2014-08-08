@@ -43,9 +43,14 @@ useful. HD-MIDI, at least, has industry consensus. If it is
 sufficiently more effective than MIDI 1.0, it may yet form part of a
 complete next-generation protocol." Ben Supper / Novation/Focusrite
 
+* Device discovery
+
+Emagic SoundDiver 3.0 was able to automatically detect some MIDI devices.
+
 * References
 
 - http://www.midi.org/aboutus/news/hd.php
 - http://www.kissbox.nl/downloads/Manuals/KissBox_CPU_V3_OEM_RTP-MIDI_HD_Integration_Manual.pdf
 - http://focusritedevelopmentteam.wordpress.com/2012/10/24/we-hate-midi-we-love-midi/
 - user BenKissBox
+- http://madamebutterface.com/assets/documents/MIDI%201.0%20Detailed%20Specification.pdf
