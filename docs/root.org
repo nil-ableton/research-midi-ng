@@ -43,14 +43,69 @@ useful. HD-MIDI, at least, has industry consensus. If it is
 sufficiently more effective than MIDI 1.0, it may yet form part of a
 complete next-generation protocol." Ben Supper / Novation/Focusrite
 
+* MIDI
+
+Was initiated by Dave Smith at sequential instrument and emerged from
+a collaboration with Oberheim, Roland. Robert Moog published the first
+paper with the specs. Predecessor protocols: Roland DCB, Dave Smith's
+USI.
+
+** Why did it succeed?
+
+- it was cheap
+- it was good enough
+- it provided some musical structure
+- escaping (SYSEX) was possible
+- serial, point to point network (basically what all technologies moved to today (Fabian Giesen 2014))
+
+** Other characteristics
+
+- the protocol influenced user interfaces a great deal (concepts such
+  as channels, ports, cc(s) numbers, the piano roll
+
+** Questionable properties
+
+- the bandwidth was limited initially (transport through wires) .. with move to Ethernet and USB this is not true anymore.
+
+- the protocol defines a basic purely technological standard that is
+  understood by many, however the MMA also sets another standard on
+  top of it that can only be dealt with conventions. For example: "The
+  Control Change message is generally used for modifying tones with a
+  controller other than a keyboard key. It is not for setting
+  synthesizer parameters such as VCF cut-off, envelope decay
+  etc. There are exceptions to the use of the Control Change such as
+  the special Bank Select message and the RPN/NRPN messages (listed
+  below)" or the fact that control changes 0-32 and 33-63 were meant
+  to define 32 14-bit control change signals in the first place.
+
+- many people relied on secondary source of information about the
+  protocol, thus reducing the impact of its conventions in particular
+  for pure software implementations.
+
+* Synchronizing Audio and Control signals
+
+Performance data (MIDI controls) in MIDI is meant to be realtime. To
+achieve perfect audio synchronization the timestamps between audio
+signals and MIDI control streams should agree. This is however not
+supported by the basic protocol. RTP-MIDI, USB and Firewire transports
+have this capability.
+
+mLan by Yamaha was an attempt to solve this by carrying audio and
+control signals together over Firewire.
+
+Bundling control signals with their media is a known way to achieve
+easy and precise synch, rarely done in practice. (Some products exist
+to convert MIDI to audio signal to do this)
+
 * Device discovery
 
 Emagic SoundDiver 3.0 was able to automatically detect some MIDI devices.
 
-* References
+* Bibliography
 
 - http://www.midi.org/aboutus/news/hd.php
 - http://www.kissbox.nl/downloads/Manuals/KissBox_CPU_V3_OEM_RTP-MIDI_HD_Integration_Manual.pdf
 - http://focusritedevelopmentteam.wordpress.com/2012/10/24/we-hate-midi-we-love-midi/
 - user BenKissBox
 - http://madamebutterface.com/assets/documents/MIDI%201.0%20Detailed%20Specification.pdf
+- Fabian Giesen 2014 http://fgiesen.wordpress.com/2014/03/23/networks-all-the-way-down/
