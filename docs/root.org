@@ -193,6 +193,13 @@ IP devices supporting RTP MIDI.
   imposing sequencing capabilities onto every receiver of OSC
   messages, which makes each receiver more complicated.
 
+- The addressing scheme, based on text, would support a standard of
+  control-types much better than the abstract controller numbers of
+  MIDI. (it's harder to ignore that "/volume" controls the volume of a
+  device and repurpose it to control a frequency cut-off than mapping
+  an abstract control number 7 to it) This assumes some moderate
+  english proficiency.
+
 * Bibliography
 
 - http://www.midi.org/aboutus/news/hd.php
