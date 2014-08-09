@@ -109,14 +109,45 @@ USI.
 - why are there so many limitations such as number of available
   controls, channels etc..
 
+- NRPN is a scheme to extend the controller count to 16384 different
+  values.. but it requires a more expensive parsing
+
+** Failures
+
+Manufacturers of software and hardware devices can and routinely
+ignore some of the MIDI detailed specification. Their platforms obey
+the technical standard (i.e. they will not send malformed messages)
+however the conventions set by the MMA are not followed. Examples:
+
+- In the standard, CC 32-63 are meant to be the fractional part of the
+  14-bit CC 00-31. This is ignored sometimes and manufacturers define
+  separate controls in that range.
+
+- CC are normally reserved for the MIDI standard. All other synthesis
+  parameters were meant to be sent via the Non Registered Parameter
+  Number (NRPN) mechanism, which defines 16384 fully assignable
+  controller numbers, all 14-bit big.
+
+  Since many cheap control surfaces don't support these, and only
+  address the standard CC numbers, custom controls are routinely
+  defined in the Undefined CC numbers area, including the LSB are of
+  CC 32-63.
+
 * 14-bit controllers
 
-Known controllers and devices able to deal with 14-bit changes:
+Known controllers and devices able to deal and produce 14-bit control
+changes:
+
 - Moog Little/Slip Phatty (Moog OS3.1)
-- Alesis Andromeda A6 reportedly (uses NRPN controls)
 - BCR 2000
 - http://forum.cockos.com/project.php?issueid=4471
 - U-ze Zebra2 and Diva support 14-bit midi CC# pairs
+- Alesis Andromeda A6 reportedly (uses NRPN controls)
+
+* NRPN capable controllers
+
+- the cheap ones don't do it
+- it seems a bit intended (NRPN vs control changes i.e. Individual synthesis parameters vs Macro parameters)
 
 * Synchronizing Audio and Control signals
 
@@ -170,4 +201,4 @@ IP devices supporting RTP MIDI.
 - user BenKissBox
 - http://madamebutterface.com/assets/documents/MIDI%201.0%20Detailed%20Specification.pdf
 - Fabian Giesen 2014 http://fgiesen.wordpress.com/2014/03/23/networks-all-the-way-down/
-- Moog OS3.1 http://www.moogmusic.com/OSv3.1 
+- Moog OS3.1 http://www.moogmusic.com/OSv3.1
