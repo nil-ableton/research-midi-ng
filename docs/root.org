@@ -133,6 +133,12 @@ however the conventions set by the MMA are not followed. Examples:
   defined in the Undefined CC numbers area, including the LSB are of
   CC 32-63.
 
+It's as if everyone talked some form of "international english" with
+none of the subtleties and sophistication of a local culture. It could
+be due the reclusive nature of the MMA (it's a club, after all)
+compared to the relative simplicity of interpreting/speaking the MIDI
+language.
+
 * 14-bit controllers
 
 Known controllers and devices able to deal and produce 14-bit control
