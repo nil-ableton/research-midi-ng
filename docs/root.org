@@ -139,6 +139,56 @@ be due the reclusive nature of the MMA (it's a club, after all)
 compared to the relative simplicity of interpreting/speaking the MIDI
 language.
 
+*** 14-bit encoders don't work well
+
+The standard says:
+
+"If 128 steps of resolution is sufficient, the second byte (LSB) can
+be ommited. If both the MSB and LSB are sent initially, a subsequent
+fine adjustment only requires the sending of the LSB. The MSB does not
+have to be retransmitted. If a subsequent major adjustment is
+necessary, the MSB must be transmitted again. When an MSB is received,
+the receiver should set its concept of the LSB to zero"
+
+This maps well to having two controllers (one for fine adjustments and another for coarse)
+
+However the fact that the MSB reset the value to zero creates problem when doing the following sequence of changes:
+
+For the sequence: 125.32 -> 126.64 sent on CC 0
+
+| operation |  state | comment  |
+|-----------+--------+----------|
+| <initial> | 125.32 |          |
+| CC 0 126  |  126.0 | artifact |
+| CC 20 64  | 126.64 |          |
+
+If instead we had done:
+
+| operation |  state | comment         |
+|-----------+--------+-----------------|
+| <initial> | 125.32 |                 |
+| CC 20 64  | 125.64 | incorrect value |
+| CC 0 126  | 126.00 | incorrect value |
+
+On the other hand, if the standard had instead stated that the MSB
+must always be sent after an LSB has been changed, and that the LSB
+value is taken into account only from that point, then we could have
+had:
+
+| operation |  state | comment |
+|-----------+--------+---------|
+| <initial> | 125.32 |         |
+| CC 20 64  |        |         |
+| CC 0 126  | 126.64 |         |
+
+A workaround would be to delay the interpretation of the MSB and
+look-ahead if the LSB has been received in the same short frame. This
+would remove the artifact shown above, at the price of a more
+expensive logic. (try implementing that in Max!)
+
+So all in all simple interpretation of 14-bit can lead to artifacts
+due to the way the standard has been set.
+
 * 14-bit controllers
 
 Known controllers and devices able to deal and produce 14-bit control
