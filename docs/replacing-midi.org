@@ -1,0 +1,43 @@
+#+TITLE: Replacing MIDI?
+# disable heading numbers (for reveal presentation)
+#+OPTIONS: num:nil
+#+AUTHOR:
+
+* MIDI has succeeded
+
+After having been initially introduced in 1983, MIDI has been
+developped by members of the MMA (Midi Manufacturer Association.)
+
+- Cheap and thus everywhere
+- With musical structure
+- Simple to understand and implement
+- Forward compatible and extensible: escaping (SYSEX) is possible, undefined statuses are ignored
+- A good fit for modern protocols: serial, point-to-point
+- New transports brings better throughput: RTP-MIDI (Midi over IP), USB
+
+* MIDI has failed
+
+- 14-bit resolution although available is poorly understood and
+  implemented in software and hardware
+- Conventions set by the standard (CC, NRPNs) have not been followed
+  by software and hardware
+- Users are required to understand the protocol at a quite low level
+  when buying/integrating hardware
+- control signals in practice not strictly aligned with audio
+
+* MIDI has an official successor: HD
+
+Still designed behind closed doors since 2005. Proof of its life
+exist: it has been demonstrated on January 27 2013, and the KissBox V3
+supports it.
+
+- offers higher resolution controls (16-bit)
+- direct pitch control for notes
+- note updates adjust a note after onset
+- messages are 32-bit and variable length, and can be timestamped
+- claims compatibility with MIDI
+- plug&play devices
+- messages exists to save/restore the settings of devices
+
+Does it solve problems user have with MIDI? Hard to know.
+

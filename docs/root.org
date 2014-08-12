@@ -1,4 +1,6 @@
 #+TITLE: MIDI: past, present, future
+# disable heading numbers (for reveal presentation)
+#+OPTIONS: num:nil
 
 * HD (2005-present)
 
@@ -123,7 +125,6 @@ fact that control changes 0-32 and 33-63 were meant to define 32
 14-bit control change signals in the first place.
 #+END_QUOTE
 
-
 ** Failures
 
 Manufacturers of software and hardware devices can and routinely
@@ -203,9 +204,11 @@ expensive logic. (try implementing that in Max!)
 So all in all simple interpretation of 14-bit can lead to artifacts
 due to the way the standard has been set.
 
-* Hardware
+*** Hardware support
 
-** 14-bit controllers
+Not a lot of hardware supports 14bit or NRPN
+
+**** 14-bit controllers
 
 Known controllers and devices able to deal and produce 14-bit control
 changes:
@@ -216,10 +219,13 @@ changes:
 - U-ze Zebra2 and Diva support 14-bit midi CC# pairs
 - Alesis Andromeda A6 reportedly (uses NRPN controls)
 
-** NRPN capable controllers
+**** NRPN capable controllers
 
 - the cheap ones don't do it
 - it seems a bit intended (NRPN vs control changes i.e. Individual synthesis parameters vs Macro parameters)
+
+
+
 
 * Synchronizing Audio and Control signals
 
@@ -271,6 +277,8 @@ IP devices supporting RTP MIDI.
   device and repurpose it to control a frequency cut-off than mapping
   an abstract control number 7 to it) This assumes some moderate
   english proficiency.
+
+* References
 
 * Bibliography
 
