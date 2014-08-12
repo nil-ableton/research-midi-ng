@@ -1,49 +1,57 @@
-* HD Protocol
+#+TITLE: MIDI: past, present, future
 
-This is the successor to MIDI developed behind closed doors by the HD
+* HD (2005-present)
+
+HD is the successor to MIDI. It is developed behind closed doors by the HD
 Working Group (HDWG) at the MIDI Manufacturers Association (MMA.)
 
-Started in 2005. Demonstrated to some manufacturers on January 27, 2013.
+An opinion:
+
+#+BEGIN_QUOTE
+"HD-MIDI promises to be improved and more versatile, and does so by
+adding complexity in ways that not everybody will find
+useful. HD-MIDI, at least, has industry consensus. If it is
+sufficiently more effective than MIDI 1.0, it may yet form part of a
+complete next-generation protocol.
+#+END_QUOTE
+Ben Supper / Novation/Focusrite (2012)
 
 ** Proofs of life:
+- Demonstrated to some manufacturers on January 27, 2013.
 - http://www.midi.org/aboutus/news/hd.php
 - [[http://www.kissbox.nl/downloads/Manuals/KissBox_CPU_V3_OEM_RTP-MIDI_HD_Integration_Manual.pdf][Kissbox CM-MIDI]] claims support for the HD Protocol already (only for
   members of the HDWG)
 - Photo of a HD <-> CV interface HDCV88 http://www.muffwiggler.com/forum/viewtopic.php?t=49278&start=10&sid=d16d268b318c7cd3119093f590ce832d
 
-** Information accessible from publicly accessible information
+Known hardware implementation: KissBox Network CPU / Kissbox / B.Bouchez / (20/02/2014)
 
-name: HD Protocol
-creators: MMA HDWG members
-known hardware implementation: KissBox Network CPU / Kissbox / B.Bouchez / (20/02/2014)
+#+BEGIN_QUOTE
+access to HD firmware is restricted to MMA HDWG members until official publication of HD protocol
+specification
+#+END_QUOTE
 
-"access to HD firmware is restricted to MMA HDWG members until official publication of HD protocol
-specification"
+** Protocol
 
-- based on 32 bits word
-- a message is multiple 32 bits words
-- no marker to identify the first word of a message
-- messages for saving/restoring state of an HD network (dump settings from an "entity")
-- real time messages vs beat-timestamped messages (with "bundles" at the same timestamp)
-- variable length messages
-- transports: USB, Ethernet
-- plug & play of devices
-- higher resolution controls
-- more throughput
-- MIDI Device compatibility
+- higher resolution controls (16bit)
 - traditional notes as well as direct pitch notes
 - note update for per-note controls (control+pitch)
-- has a transport protocol (USB + some protocol compatible with RTP-MIDI, while being independent)
+- messages composed of 32 bits words, variable length
+- no marker to identify the first word of a message
+- both real time messages and timestamped messages (with "bundles" at the same timestamp)
 
-Opinion:
+** Devices
 
-"HD-MIDI promises to be improved and more versatile, and does so by
-adding complexity in ways that not everybody will find
-useful. HD-MIDI, at least, has industry consensus. If it is
-sufficiently more effective than MIDI 1.0, it may yet form part of a
-complete next-generation protocol." Ben Supper / Novation/Focusrite
+- MIDI Device compatibility (how is unclear)
+- Plug & play of devices
+- messages for saving/restoring state of an HD network (dump settings from an "entity")
 
-* MIDI
+** Transport
+
+- more throughput
+- transports: USB, Ethernet
+- dedicated transport protocol (USB + some protocol compatible with RTP-MIDI, while being independent)
+
+* Past&Present: MIDI
 
 Was initiated by Dave Smith at sequential instrument and emerged from
 a collaboration with Oberheim, Roland. Robert Moog published the first
@@ -73,25 +81,12 @@ USI.
 
 ** Questionable properties
 
-- the bandwidth was limited initially (transport through wires)
-  .. with move to Ethernet and USB this is not true anymore. This
-  influenced some design decisions (compression through running
-  status, the use of 7-bit only control changes) because it limited
-  performances.
+- limited throughput with traditional wire transport. This
+  unfortunately influenced some design decisions.
+- but, greater throughput achieved with Ethernet/Wifi and USB
 
 - running status makes the design complex and makes it harder to
   implement variable length messages
-
-- the protocol defines a basic purely technological standard that is
-  understood by many, however the MMA also sets another standard on
-  top of it that can only be dealt with conventions. For example: "The
-  Control Change message is generally used for modifying tones with a
-  controller other than a keyboard key. It is not for setting
-  synthesizer parameters such as VCF cut-off, envelope decay
-  etc. There are exceptions to the use of the Control Change such as
-  the special Bank Select message and the RPN/NRPN messages (listed
-  below)" or the fact that control changes 0-32 and 33-63 were meant
-  to define 32 14-bit control change signals in the first place.
 
 - many people relied on secondary source of information about the
   protocol, thus reducing the impact of its conventions in particular
@@ -111,6 +106,23 @@ USI.
 
 - NRPN is a scheme to extend the controller count to 16384 different
   values.. but it requires a more expensive parsing
+
+The protocol defines a basic purely technological standard that is
+understood by many. The MMA also sets another standard on top of it
+that can only be dealt with conventions.
+
+For example:
+
+#+BEGIN_QUOTE 
+The Control Change message is generally used for modifying tones with
+a controller other than a keyboard key. It is not for setting
+synthesizer parameters such as VCF cut-off, envelope decay etc. There
+are exceptions to the use of the Control Change such as the special
+Bank Select message and the RPN/NRPN messages (listed below)" or the
+fact that control changes 0-32 and 33-63 were meant to define 32
+14-bit control change signals in the first place.
+#+END_QUOTE
+
 
 ** Failures
 
@@ -143,12 +155,14 @@ language.
 
 The standard says:
 
-"If 128 steps of resolution is sufficient, the second byte (LSB) can
+#+BEGIN_QUOTE
+If 128 steps of resolution is sufficient, the second byte (LSB) can
 be ommited. If both the MSB and LSB are sent initially, a subsequent
 fine adjustment only requires the sending of the LSB. The MSB does not
 have to be retransmitted. If a subsequent major adjustment is
 necessary, the MSB must be transmitted again. When an MSB is received,
-the receiver should set its concept of the LSB to zero"
+the receiver should set its concept of the LSB to zero
+#+END_QUOTE
 
 This maps well to having two controllers (one for fine adjustments and another for coarse)
 
@@ -189,7 +203,9 @@ expensive logic. (try implementing that in Max!)
 So all in all simple interpretation of 14-bit can lead to artifacts
 due to the way the standard has been set.
 
-* 14-bit controllers
+* Hardware
+
+** 14-bit controllers
 
 Known controllers and devices able to deal and produce 14-bit control
 changes:
@@ -200,7 +216,7 @@ changes:
 - U-ze Zebra2 and Diva support 14-bit midi CC# pairs
 - Alesis Andromeda A6 reportedly (uses NRPN controls)
 
-* NRPN capable controllers
+** NRPN capable controllers
 
 - the cheap ones don't do it
 - it seems a bit intended (NRPN vs control changes i.e. Individual synthesis parameters vs Macro parameters)
@@ -240,7 +256,7 @@ A positive development. Succeeds where Yamaha's mLan (IEC 61883-6)
 failed. Combined with Zeroconf / Bonjour, allows discovery of
 IP devices supporting RTP MIDI.
 
-* OSC
+* Some words about OSC
 
 - No clear structure / namespace
 - Needs convention / standardization of the same form as MIDI has
@@ -265,3 +281,4 @@ IP devices supporting RTP MIDI.
 - http://madamebutterface.com/assets/documents/MIDI%201.0%20Detailed%20Specification.pdf
 - Fabian Giesen 2014 http://fgiesen.wordpress.com/2014/03/23/networks-all-the-way-down/
 - Moog OS3.1 http://www.moogmusic.com/OSv3.1
+
